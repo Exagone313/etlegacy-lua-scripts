@@ -43,6 +43,12 @@ Remove spawn shield protection when firing.
 
 * This script is intended for legacy `2.77+` mod.
 
+## [Chat Shortcuts](chat-shortcuts/README.md)
+
+This script enables players to use chat shortcuts in their messages.
+
+This script is intended for legacy `2.83+` mod.
+
 # Notes
 * Please always add modname and version to your lua script
 ```
