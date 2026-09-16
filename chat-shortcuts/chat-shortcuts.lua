@@ -112,6 +112,10 @@ local shortcuts = {
 	["a"] = function (sender, receiver) -- last player who gave you ammo
 		return formatUsername(et.gentity_get(sender, "pers.lastammo_client"))
 	end,
+	["c"] = function (sender, receiver) -- name of current class
+		local class = et.gentity_get(sender, "sess.playerType")
+		return et_classes[class]
+	end,
 	["d"] = function (sender, receiver) -- last player who killed you
 		return formatUsername(last_killer[sender])
 	end,
@@ -129,18 +133,14 @@ local shortcuts = {
 	["n"] = function (sender, receiver) -- your name
 		return formatUsername(sender)
 	end,
+	["o"] = function (sender, receiver) -- other player receiving the message
+		return formatUsername(receiver)
+	end,
 	["r"] = function (sender, receiver) -- last player who revived you
 		return formatUsername(et.gentity_get(sender, "pers.lastrevive_client"))
 	end,
 	["s"] = function (sender, receiver) -- remaining health
 		return et.gentity_get(sender, "health")
-	end,
-	["w"] = function (sender, receiver) -- name of current weapon
-		local weapon = et.gentity_get(sender, "ps.weapon")
-		if et_weapons[weapon] ~= nil then
-			return et_weapons[weapon]
-		end
-		return "weapon"
 	end,
 	["t"] = function (sender, receiver) -- ammo for current weapon
 		local weapon = et.gentity_get(sender, "ps.weapon")
@@ -148,12 +148,12 @@ local shortcuts = {
 		local clip = et.gentity_get(sender, "ps.ammoclip", weapon)
 		return ammo + clip
 	end,
-	["c"] = function (sender, receiver) -- name of current class
-		local class = et.gentity_get(sender, "sess.playerType")
-		return et_classes[class]
-	end,
-	["o"] = function (sender, receiver) -- other player receiving the message
-		return formatUsername(receiver)
+	["w"] = function (sender, receiver) -- name of current weapon
+		local weapon = et.gentity_get(sender, "ps.weapon")
+		if et_weapons[weapon] ~= nil then
+			return et_weapons[weapon]
+		end
+		return "weapon"
 	end,
 }
 
@@ -163,7 +163,7 @@ end
 
 function et_Chat(sender, receiver, message)
 	local cache = {}
-	return 1, message:gsub("%[([adghknrswtco])%]", function(shortcut)
+	return 1, message:gsub("%[([acdghknorstw])%]", function(shortcut)
 		if cache[shortcut] == nil then
 			cache[shortcut] = shortcuts[shortcut](sender, receiver)
 		end
