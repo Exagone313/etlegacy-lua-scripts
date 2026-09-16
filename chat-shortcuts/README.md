@@ -11,10 +11,8 @@ This script is intended for legacy `2.83+` mod.
 | `[g]` | First 8 characters of player GUID (can be seen in `/players`) |
 | `[h]` | Name of the last player who gave health to the player |
 | `[k]` | Name of the last player killed by the player |
-| `[l]` | Location of the player **(not implemented)** |
 | `[n]` | Name of the player |
 | `[r]` | Name of the last player who revived the player |
-| `[p]` | Name of the last player the player looked at **(not implemented)** |
 | `[s]` | Player remaining health |
 | `[w]` | Player weapon |
 | `[t]` | Player weapon ammo |

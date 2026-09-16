@@ -126,21 +126,11 @@ local shortcuts = {
 	["k"] = function (sender, receiver) -- last player you killed
 		return formatUsername(et.gentity_get(sender, "pers.lastkilled_client"))
 	end,
-	["l"] = function (sender, receiver) -- your location
-		--local origin = et.gentity_get(sender, "ps.origin")
-		-- TODO BG_GetLocationString(origin[0], origin[1])
-		return "?,?"
-	end,
 	["n"] = function (sender, receiver) -- your name
 		return formatUsername(sender)
 	end,
 	["r"] = function (sender, receiver) -- last player who revived you
 		return formatUsername(et.gentity_get(sender, "pers.lastrevive_client"))
-	end,
-	["p"] = function (sender, receiver) -- last player you looked at
-		-- TODO and make sure disguised player name is returned if opposite team
-		-- idea: get closest player instead (with a distance limit?)
-		return "^7Buddy"
 	end,
 	["s"] = function (sender, receiver) -- remaining health
 		return et.gentity_get(sender, "health")
@@ -173,7 +163,7 @@ end
 
 function et_Chat(sender, receiver, message)
 	local cache = {}
-	return 1, message:gsub("%[([adghklnrpswtco])%]", function(shortcut)
+	return 1, message:gsub("%[([adghknrswtco])%]", function(shortcut)
 		if cache[shortcut] == nil then
 			cache[shortcut] = shortcuts[shortcut](sender, receiver)
 		end
