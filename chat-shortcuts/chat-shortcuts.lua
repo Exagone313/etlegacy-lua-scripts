@@ -120,7 +120,7 @@ local shortcuts = {
 		return formatUsername(last_killer[sender])
 	end,
 	["g"] = function (sender, receiver) -- the first 8 characters of your GUID
-		local userinfo = et.trap_GetUserinfo(sender, receiver)
+		local userinfo = et.trap_GetUserinfo(sender)
 		local guid = et.Info_ValueForKey(userinfo, "cl_guid")
 		return guid:sub(1, 8)
 	end,
